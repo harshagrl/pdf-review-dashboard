@@ -2,9 +2,9 @@ import { z } from "zod";
 
 const lineItemSchema = z.object({
   description: z.string().min(1, "Description is required"),
-  unitPrice: z.coerce.number().min(0, "Unit price must be positive"),
-  quantity: z.coerce.number().min(1, "Quantity must be at least 1"),
-  total: z.coerce.number().min(0, "Total must be positive"),
+  unitPrice: z.number().min(0, "Unit price must be positive"),
+  quantity: z.number().min(1, "Quantity must be at least 1"),
+  total: z.number().min(0, "Total must be positive"),
 });
 
 export const invoiceSchema = z.object({
@@ -17,9 +17,9 @@ export const invoiceSchema = z.object({
     number: z.string().min(1, "Invoice number is required"),
     date: z.string().min(1, "Invoice date is required"),
     currency: z.string().optional(),
-    subtotal: z.coerce.number().optional(),
-    taxPercent: z.coerce.number().optional(),
-    total: z.coerce.number().optional(),
+    subtotal: z.number().optional(),
+    taxPercent: z.number().optional(),
+    total: z.number().optional(),
     poNumber: z.string().optional(),
     poDate: z.string().optional(),
     lineItems: z.array(lineItemSchema),
